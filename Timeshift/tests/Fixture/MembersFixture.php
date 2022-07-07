@@ -46,9 +46,9 @@ class MembersFixture extends TestFixture
                 'email' => 'Lorem ipsum dolor sit amet',
                 'password' => 'Lorem ipsum dolor sit amet',
                 'gender' => 1,
-                'birth' => '2022-07-07 11:34:16',
+                'birth' => '2022-07-07 13:18:16',
                 'address' => 'Lorem ipsum dolor sit amet',
-                'created' => '2022-07-07 11:34:16',
+                'created' => '2022-07-07 13:18:16',
             ],
         ];
         parent::init();

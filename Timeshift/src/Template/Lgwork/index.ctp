@@ -1,19 +1,19 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Lgwork[]|\Cake\Collection\CollectionInterface $lgwork
+ * @var \App\Model\Entity\LgWork[]|\Cake\Collection\CollectionInterface $lgWork
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Lgwork'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New Lg Work'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Members'), ['controller' => 'Members', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Member'), ['controller' => 'Members', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="lgwork index large-9 medium-8 columns content">
-    <h3><?= __('Lgwork') ?></h3>
+<div class="lgWork index large-9 medium-8 columns content">
+    <h3><?= __('Lg Work') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -24,15 +24,15 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($lgwork as $lgwork): ?>
+            <?php foreach ($lgWork as $lgWork): ?>
             <tr>
-                <td><?= $this->Number->format($lgwork->id) ?></td>
-                <td><?= h($lgwork->time) ?></td>
-                <td><?= $lgwork->has('member') ? $this->Html->link($lgwork->member->name, ['controller' => 'Members', 'action' => 'view', $lgwork->member->id]) : '' ?></td>
+                <td><?= $this->Number->format($lgWork->id) ?></td>
+                <td><?= h($lgWork->time) ?></td>
+                <td><?= $lgWork->has('member') ? $this->Html->link($lgWork->member->name, ['controller' => 'Members', 'action' => 'view', $lgWork->member->id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $lgwork->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lgwork->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lgwork->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lgwork->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $lgWork->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lgWork->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lgWork->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lgWork->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

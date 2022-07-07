@@ -4,13 +4,13 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Atwork Controller
+ * AtWork Controller
  *
- * @property \App\Model\Table\AtworkTable $Atwork
+ * @property \App\Model\Table\AtWorkTable $AtWork
  *
- * @method \App\Model\Entity\Atwork[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\AtWork[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class AtworkController extends AppController
+class AtWorkController extends AppController
 {
     /**
      * Index method
@@ -22,25 +22,25 @@ class AtworkController extends AppController
         $this->paginate = [
             'contain' => ['Members'],
         ];
-        $atwork = $this->paginate($this->Atwork);
+        $atWork = $this->paginate($this->AtWork);
 
-        $this->set(compact('atwork'));
+        $this->set(compact('atWork'));
     }
 
     /**
      * View method
      *
-     * @param string|null $id Atwork id.
+     * @param string|null $id At Work id.
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $atwork = $this->Atwork->get($id, [
+        $atWork = $this->AtWork->get($id, [
             'contain' => ['Members'],
         ]);
 
-        $this->set('atwork', $atwork);
+        $this->set('atWork', $atWork);
     }
 
     /**
@@ -50,60 +50,60 @@ class AtworkController extends AppController
      */
     public function add()
     {
-        $atwork = $this->Atwork->newEntity();
+        $atWork = $this->AtWork->newEntity();
         if ($this->request->is('post')) {
-            $atwork = $this->Atwork->patchEntity($atwork, $this->request->getData());
-            if ($this->Atwork->save($atwork)) {
-                $this->Flash->success(__('The atwork has been saved.'));
+            $atWork = $this->AtWork->patchEntity($atWork, $this->request->getData());
+            if ($this->AtWork->save($atWork)) {
+                $this->Flash->success(__('The at work has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The atwork could not be saved. Please, try again.'));
+            $this->Flash->error(__('The at work could not be saved. Please, try again.'));
         }
-        $members = $this->Atwork->Members->find('list', ['limit' => 200]);
-        $this->set(compact('atwork', 'members'));
+        $members = $this->AtWork->Members->find('list', ['limit' => 200]);
+        $this->set(compact('atWork', 'members'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Atwork id.
+     * @param string|null $id At Work id.
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $atwork = $this->Atwork->get($id, [
+        $atWork = $this->AtWork->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $atwork = $this->Atwork->patchEntity($atwork, $this->request->getData());
-            if ($this->Atwork->save($atwork)) {
-                $this->Flash->success(__('The atwork has been saved.'));
+            $atWork = $this->AtWork->patchEntity($atWork, $this->request->getData());
+            if ($this->AtWork->save($atWork)) {
+                $this->Flash->success(__('The at work has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The atwork could not be saved. Please, try again.'));
+            $this->Flash->error(__('The at work could not be saved. Please, try again.'));
         }
-        $members = $this->Atwork->Members->find('list', ['limit' => 200]);
-        $this->set(compact('atwork', 'members'));
+        $members = $this->AtWork->Members->find('list', ['limit' => 200]);
+        $this->set(compact('atWork', 'members'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Atwork id.
+     * @param string|null $id At Work id.
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $atwork = $this->Atwork->get($id);
-        if ($this->Atwork->delete($atwork)) {
-            $this->Flash->success(__('The atwork has been deleted.'));
+        $atWork = $this->AtWork->get($id);
+        if ($this->AtWork->delete($atWork)) {
+            $this->Flash->success(__('The at work has been deleted.'));
         } else {
-            $this->Flash->error(__('The atwork could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The at work could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
