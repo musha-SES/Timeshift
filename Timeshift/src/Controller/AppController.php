@@ -46,10 +46,26 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
-        /*
-         * Enable the following component for recommended CakePHP security settings.
-         * see https://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
-        //$this->loadComponent('Security');
+        $this->loadComponent('Auth', [
+            // ログイン画面の URL
+            'loginAction' => [
+                'controller' => 'Members',
+                'action' => 'login',
+            ],
+            // ログイン成功時にリタイレクトさせる URL
+            'loginRedirect' => [
+                'controller' => 'Members',
+                'action' => 'index'
+            ],
+            // 
+            'authenticate' => [
+                'Form' => [
+                    'userModel' => 'Members',
+                    'fields' => ['username' => 'email', 'password' => 'password']
+                ]
+            ],
+            // ログアウト後にリダイレクトさせる URL、デフォルトは loginAction を参照する
+            'logoutRedirect' => []
+        ]);
     }
 }

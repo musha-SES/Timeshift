@@ -103,4 +103,24 @@ class MembersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function login()
+    {
+        $member = $this->Members->newEntity();
+        if ($this->request->is('post')) {
+            $member = $this->Members->patchEntity($member, $this->request->data);
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->error('メールアドレスかパスワードが間違っています');
+            }
+        }
+        $this->set(compact($member));
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
 }
