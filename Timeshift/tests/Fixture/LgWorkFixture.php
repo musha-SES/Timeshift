@@ -43,7 +43,7 @@ class LgWorkFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'time' => '2022-07-07 11:34:03',
+                'time' => '2022-07-07 13:17:26',
                 'member_id' => 1,
             ],
         ];

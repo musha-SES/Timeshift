@@ -1,19 +1,19 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Atwork[]|\Cake\Collection\CollectionInterface $atwork
+ * @var \App\Model\Entity\AtWork[]|\Cake\Collection\CollectionInterface $atWork
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Atwork'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New At Work'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Members'), ['controller' => 'Members', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Member'), ['controller' => 'Members', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="atwork index large-9 medium-8 columns content">
-    <h3><?= __('Atwork') ?></h3>
+<div class="atWork index large-9 medium-8 columns content">
+    <h3><?= __('At Work') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -24,15 +24,15 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($atwork as $atwork): ?>
+            <?php foreach ($atWork as $atWork): ?>
             <tr>
-                <td><?= $this->Number->format($atwork->id) ?></td>
-                <td><?= h($atwork->time) ?></td>
-                <td><?= $atwork->has('member') ? $this->Html->link($atwork->member->name, ['controller' => 'Members', 'action' => 'view', $atwork->member->id]) : '' ?></td>
+                <td><?= $this->Number->format($atWork->id) ?></td>
+                <td><?= h($atWork->time) ?></td>
+                <td><?= $atWork->has('member') ? $this->Html->link($atWork->member->name, ['controller' => 'Members', 'action' => 'view', $atWork->member->id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $atwork->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $atwork->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $atwork->id], ['confirm' => __('Are you sure you want to delete # {0}?', $atwork->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $atWork->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $atWork->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $atWork->id], ['confirm' => __('Are you sure you want to delete # {0}?', $atWork->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

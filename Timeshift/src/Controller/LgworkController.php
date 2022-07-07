@@ -4,13 +4,13 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Lgwork Controller
+ * LgWork Controller
  *
- * @property \App\Model\Table\LgworkTable $Lgwork
+ * @property \App\Model\Table\LgWorkTable $LgWork
  *
- * @method \App\Model\Entity\Lgwork[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\LgWork[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class LgworkController extends AppController
+class LgWorkController extends AppController
 {
     /**
      * Index method
@@ -22,25 +22,25 @@ class LgworkController extends AppController
         $this->paginate = [
             'contain' => ['Members'],
         ];
-        $lgwork = $this->paginate($this->Lgwork);
+        $lgWork = $this->paginate($this->LgWork);
 
-        $this->set(compact('lgwork'));
+        $this->set(compact('lgWork'));
     }
 
     /**
      * View method
      *
-     * @param string|null $id Lgwork id.
+     * @param string|null $id Lg Work id.
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $lgwork = $this->Lgwork->get($id, [
+        $lgWork = $this->LgWork->get($id, [
             'contain' => ['Members'],
         ]);
 
-        $this->set('lgwork', $lgwork);
+        $this->set('lgWork', $lgWork);
     }
 
     /**
@@ -50,60 +50,60 @@ class LgworkController extends AppController
      */
     public function add()
     {
-        $lgwork = $this->Lgwork->newEntity();
+        $lgWork = $this->LgWork->newEntity();
         if ($this->request->is('post')) {
-            $lgwork = $this->Lgwork->patchEntity($lgwork, $this->request->getData());
-            if ($this->Lgwork->save($lgwork)) {
-                $this->Flash->success(__('The lgwork has been saved.'));
+            $lgWork = $this->LgWork->patchEntity($lgWork, $this->request->getData());
+            if ($this->LgWork->save($lgWork)) {
+                $this->Flash->success(__('The lg work has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lgwork could not be saved. Please, try again.'));
+            $this->Flash->error(__('The lg work could not be saved. Please, try again.'));
         }
-        $members = $this->Lgwork->Members->find('list', ['limit' => 200]);
-        $this->set(compact('lgwork', 'members'));
+        $members = $this->LgWork->Members->find('list', ['limit' => 200]);
+        $this->set(compact('lgWork', 'members'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Lgwork id.
+     * @param string|null $id Lg Work id.
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $lgwork = $this->Lgwork->get($id, [
+        $lgWork = $this->LgWork->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $lgwork = $this->Lgwork->patchEntity($lgwork, $this->request->getData());
-            if ($this->Lgwork->save($lgwork)) {
-                $this->Flash->success(__('The lgwork has been saved.'));
+            $lgWork = $this->LgWork->patchEntity($lgWork, $this->request->getData());
+            if ($this->LgWork->save($lgWork)) {
+                $this->Flash->success(__('The lg work has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lgwork could not be saved. Please, try again.'));
+            $this->Flash->error(__('The lg work could not be saved. Please, try again.'));
         }
-        $members = $this->Lgwork->Members->find('list', ['limit' => 200]);
-        $this->set(compact('lgwork', 'members'));
+        $members = $this->LgWork->Members->find('list', ['limit' => 200]);
+        $this->set(compact('lgWork', 'members'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Lgwork id.
+     * @param string|null $id Lg Work id.
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $lgwork = $this->Lgwork->get($id);
-        if ($this->Lgwork->delete($lgwork)) {
-            $this->Flash->success(__('The lgwork has been deleted.'));
+        $lgWork = $this->LgWork->get($id);
+        if ($this->LgWork->delete($lgWork)) {
+            $this->Flash->success(__('The lg work has been deleted.'));
         } else {
-            $this->Flash->error(__('The lgwork could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The lg work could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
