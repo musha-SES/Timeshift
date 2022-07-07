@@ -84,7 +84,7 @@ class MembersTable extends Table
             ->notEmptyString('gender');
 
         $validator
-            ->dateTime('birth')
+            ->date('birth')
             ->allowEmptyDateTime('birth');
 
         $validator

@@ -58,6 +58,10 @@ class MembersController extends AppController
             $this->Flash->error(__('The member could not be saved. Please, try again.'));
         }
         $this->set(compact('member'));
+
+        $gender = [1=>'男性', 2=>'女性', 3=>'その他'];
+
+        $this->set('gender', $gender);
     }
 
     /**
@@ -82,6 +86,10 @@ class MembersController extends AppController
             $this->Flash->error(__('The member could not be saved. Please, try again.'));
         }
         $this->set(compact('member'));
+
+        $gender = [1=>'男性', 2=>'女性', 3=>'その他'];
+
+        $this->set('gender', $gender);
     }
 
     /**
@@ -103,4 +111,20 @@ class MembersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function login()
+{
+    $member = $this->Members->newEntity();
+    if ($this->request->is('post')) {
+        $member = $this->Members->patchEntity($member, $this->request->data);
+        $user = $this->Auth->identify();
+        if ($user) {
+            $this->Auth->setUser($user);
+            return $this->redirect($this->Auth->redirectUrl());
+        } else {
+            $this->Flash->error('メールアドレスかパスワードが間違っています');
+        }
+    }
+    $this->set(compact($member));
+}
 }

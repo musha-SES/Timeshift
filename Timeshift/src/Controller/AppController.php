@@ -51,5 +51,27 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+
+        $this->loadComponent('Auth', [
+            // ログイン画面の URL
+            'loginAction' => [
+                'controller' => 'Members',
+                'action' => 'login',
+            ],
+            // ログイン成功時にリタイレクトさせる URL
+            'loginRedirect' => [
+                'controller' => 'Members',
+                'action' => 'index'
+            ],
+            //
+            'authenticate' => [
+                'Form' => [
+                    'userModel' => 'Members',
+                    'fields' => ['username' => 'email', 'password' => 'password']
+                ]
+            ],
+            // ログアウト後にリダイレクトさせる URL、デフォルトは loginAction を参照する
+            'logoutRedirect' => []
+        ]);
     }
 }
