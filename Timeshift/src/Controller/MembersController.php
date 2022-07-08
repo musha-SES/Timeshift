@@ -41,6 +41,22 @@ class MembersController extends AppController
     }
 
     /**
+     * View method
+     *
+     * @param string|null $id Member id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function users($id = null)
+    {
+        $member = $this->Members->get($id, [
+            'contain' => ['AtWork', 'LgWork'],
+        ]);
+
+        $this->set('member', $member);
+    }
+
+    /**
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
@@ -102,5 +118,25 @@ class MembersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    public function login()
+    {
+        $member = $this->Members->newEntity();
+        if ($this->request->is('post')) {
+            $member = $this->Members->patchEntity($member, $this->request->data);
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->error('メールアドレスかパスワードが間違っています');
+            }
+        }
+        $this->set(compact($member));
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
     }
 }
