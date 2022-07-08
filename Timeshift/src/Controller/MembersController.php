@@ -50,7 +50,7 @@ class MembersController extends AppController
     public function users($id = null)
     {
         $member = $this->Members->get($id, [
-            'contain' => ['AtWork', 'LgWork'],
+            'contain' => ['Working'],
         ]);
 
         $this->set('member', $member);
@@ -136,7 +136,8 @@ class MembersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                $id = $this->Auth->user('id');
+                return $this->redirect(['action' => 'users',$id]);
             } else {
                 $this->Flash->error('メールアドレスかパスワードが間違っています');
             }

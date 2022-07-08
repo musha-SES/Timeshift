@@ -7,26 +7,24 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Member'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List At Work'), ['controller' => 'AtWork', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Lg Work'), ['controller' => 'LgWork', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('ユーザー新規追加'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Working', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="members index large-9 medium-8 columns content">
-    <h3><?= __('Members') ?></h3>
+    <h3><?= __('社員リスト') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('氏名') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('gender') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('birth') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('address') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('性別') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('生年月日') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('住所') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('登録日時') ?></th>
+                <th scope="col" class="actions"><?= __('編集') ?></th>
             </tr>
         </thead>
         <tbody>

@@ -69,4 +69,5 @@ class AppController extends Controller
             'logoutRedirect' => []
         ]);
     }
+
 }
