@@ -18,6 +18,7 @@ use Cake\Auth\DefaultPasswordHasher;
  *
  * @property \App\Model\Entity\AtWork[] $at_work
  * @property \App\Model\Entity\LgWork[] $lg_work
+ * @property \App\Model\Entity\Working[] $working
  */
 class Member extends Entity
 {

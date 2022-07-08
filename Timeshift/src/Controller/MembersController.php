@@ -34,7 +34,7 @@ class MembersController extends AppController
     public function view($id = null)
     {
         $member = $this->Members->get($id, [
-            'contain' => ['AtWork', 'LgWork'],
+            'contain' => ['Working'],
         ]);
 
         $this->set('member', $member);
