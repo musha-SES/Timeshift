@@ -4,15 +4,17 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * AtWork Entity
+ * Working Entity
  *
  * @property int $id
- * @property \Cake\I18n\FrozenTime|null $time
+ * @property \Cake\I18n\FrozenTime|null $check_in
+ * @property \Cake\I18n\FrozenTime|null $check_out
  * @property int $member_id
+ * @property \Cake\I18n\FrozenDate $created
  *
  * @property \App\Model\Entity\Member $member
  */
-class AtWork extends Entity
+class Working extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -24,8 +26,10 @@ class AtWork extends Entity
      * @var array
      */
     protected $_accessible = [
-        'time' => true,
+        'check_in' => true,
+        'check_out' => true,
         'member_id' => true,
+        'created' => true,
         'member' => true,
     ];
 }
