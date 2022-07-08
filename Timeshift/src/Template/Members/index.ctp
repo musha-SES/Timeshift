@@ -9,9 +9,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Member'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List At Work'), ['controller' => 'AtWork', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New At Work'), ['controller' => 'AtWork', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Lg Work'), ['controller' => 'LgWork', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Lg Work'), ['controller' => 'LgWork', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Working', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="members index large-9 medium-8 columns content">

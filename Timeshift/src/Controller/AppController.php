@@ -46,11 +46,6 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
-        /*
-         * Enable the following component for recommended CakePHP security settings.
-         * see https://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
-        //$this->loadComponent('Security');
 
         $this->loadComponent('Auth', [
             // ログイン画面の URL
@@ -63,7 +58,7 @@ class AppController extends Controller
                 'controller' => 'Members',
                 'action' => 'index'
             ],
-            //
+
             'authenticate' => [
                 'Form' => [
                     'userModel' => 'Members',
