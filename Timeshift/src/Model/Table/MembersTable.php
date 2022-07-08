@@ -85,7 +85,9 @@ class MembersTable extends Table
 
         $validator
             ->date('birth')
+
             ->allowEmptyDate('birth');
+
 
         $validator
             ->scalar('address')

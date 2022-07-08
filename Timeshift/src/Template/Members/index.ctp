@@ -36,10 +36,17 @@
                 <td><?= h($member->name) ?></td>
                 <td><?= h($member->email) ?></td>
                 <td><?= h($member->password) ?></td>
-                <td><?= $this->Number->format($member->gender) ?></td>
-                <td><?= h($member->birth) ?></td>
+                <?php $g=$this->Number->format($member->gender);
+                    if($g==1): ?>
+                <td><?= '男性' ?></td>
+                <?php elseif($g==2): ?>
+                <td><?= '女性' ?></td>
+                <?php elseif($g==3): ?>
+                <td><?= 'その他' ?></td>
+                <?php endif; ?>
+                <td><?= date("Y/m/d", strtotime(h($member->birth))) ?></td>
                 <td><?= h($member->address) ?></td>
-                <td><?= h($member->created) ?></td>
+                <td><?= date("Y/m/d H:i:s", strtotime(h($member->created))) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $member->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $member->id]) ?>

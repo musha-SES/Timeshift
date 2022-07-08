@@ -46,6 +46,7 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
+
         $this->loadComponent('Auth', [
             // ログイン画面の URL
             'loginAction' => [
@@ -57,7 +58,7 @@ class AppController extends Controller
                 'controller' => 'Members',
                 'action' => 'index'
             ],
-            // 
+
             'authenticate' => [
                 'Form' => [
                     'userModel' => 'Members',

@@ -74,6 +74,10 @@ class MembersController extends AppController
             $this->Flash->error(__('The member could not be saved. Please, try again.'));
         }
         $this->set(compact('member'));
+
+        $gender = [1=>'男性', 2=>'女性', 3=>'その他'];
+
+        $this->set('gender', $gender);
     }
 
     /**
@@ -98,6 +102,10 @@ class MembersController extends AppController
             $this->Flash->error(__('The member could not be saved. Please, try again.'));
         }
         $this->set(compact('member'));
+
+        $gender = [1=>'男性', 2=>'女性', 3=>'その他'];
+
+        $this->set('gender', $gender);
     }
 
     /**
@@ -119,6 +127,7 @@ class MembersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
     public function login()
     {
         $member = $this->Members->newEntity();
@@ -140,3 +149,4 @@ class MembersController extends AppController
         return $this->redirect($this->Auth->logout());
     }
 }
+

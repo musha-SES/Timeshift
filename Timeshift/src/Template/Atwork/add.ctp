@@ -17,7 +17,9 @@
     <fieldset>
         <legend><?= __('Add At Work') ?></legend>
         <?php
-            echo $this->Form->control('time', ['empty' => true]);
+            echo $time;
+            echo $this->Form->input('time');
+            // echo $this->Form->control('time', ['empty' => true]);
             echo $this->Form->control('member_id', ['options' => $members]);
         ?>
     </fieldset>

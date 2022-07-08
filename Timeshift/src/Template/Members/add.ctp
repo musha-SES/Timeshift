@@ -22,8 +22,13 @@
             echo $this->Form->control('name');
             echo $this->Form->control('email');
             echo $this->Form->control('password');
-            echo $this->Form->control('gender');
-            echo $this->Form->control('birth', ['empty' => true]);
+            echo $this->Form->control('gender',['options' => $gender]);
+            // echo $this->Form->control('birth', ['empty' => true]);
+            echo $this -> Form ->control( "birth",  [
+                                            "dateFormat" => "YMD",
+                                            "minYear" => date ( "Y" ) - 70,
+                                            "maxYear" => date ( "Y" ) ] );
+
             echo $this->Form->control('address');
         ?>
     </fieldset>
