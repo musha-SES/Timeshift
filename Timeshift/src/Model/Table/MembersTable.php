@@ -11,7 +11,8 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\AtWorkTable&\Cake\ORM\Association\HasMany $AtWork
  * @property \App\Model\Table\LgWorkTable&\Cake\ORM\Association\HasMany $LgWork
- *
+ * @property \App\Model\Table\WorkingTable&\Cake\ORM\Association\HasMany $Working
+ * 
  * @method \App\Model\Entity\Member get($primaryKey, $options = [])
  * @method \App\Model\Entity\Member newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Member[] newEntities(array $data, array $options = [])
