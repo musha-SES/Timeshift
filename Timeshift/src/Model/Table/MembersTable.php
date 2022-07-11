@@ -107,4 +107,5 @@ class MembersTable extends Table
 
         return $rules;
     }
+
 }

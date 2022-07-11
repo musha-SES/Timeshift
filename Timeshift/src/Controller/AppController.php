@@ -48,6 +48,7 @@ class AppController extends Controller
 
 
         $this->loadComponent('Auth', [
+            'authorize' => 'Controller',
             // ログイン画面の URL
             'loginAction' => [
                 'controller' => 'Members',
@@ -62,12 +63,23 @@ class AppController extends Controller
             'authenticate' => [
                 'Form' => [
                     'userModel' => 'Members',
-                    'fields' => ['username' => 'email', 'password' => 'password']
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
                 ]
             ],
             // ログアウト後にリダイレクトさせる URL、デフォルトは loginAction を参照する
-            'logoutRedirect' => []
+            // 'logoutRedirect' => []
         ]);
+    }
+    public function isAuthorized($user)
+    {
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        return false;
     }
 
 }
