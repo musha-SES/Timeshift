@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Working Entity
+ * Works Entity
  *
  * @property int $id
  * @property \Cake\I18n\FrozenTime|null $check_in
@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Member $member
  */
-class Working extends Entity
+class Works extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

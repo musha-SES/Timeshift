@@ -2,7 +2,6 @@
 namespace App\Model\Entity;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
-use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Member Entity
@@ -16,8 +15,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $address
  * @property \Cake\I18n\FrozenTime $created
  *
- * @property \App\Model\Entity\AtWork[] $at_work
- * @property \App\Model\Entity\LgWork[] $lg_work
+ * @property \App\Model\Entity\Works[] $works
  */
 class Member extends Entity
 {
@@ -38,8 +36,7 @@ class Member extends Entity
         'birth' => true,
         'address' => true,
         'created' => true,
-        'at_work' => true,
-        'lg_work' => true,
+        'works' => true,
     ];
 
     /**

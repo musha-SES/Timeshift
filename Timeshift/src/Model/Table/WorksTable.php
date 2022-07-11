@@ -7,22 +7,22 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Working Model
+ * Works Model
  *
  * @property \App\Model\Table\MembersTable&\Cake\ORM\Association\BelongsTo $Members
  *
- * @method \App\Model\Entity\Working get($primaryKey, $options = [])
- * @method \App\Model\Entity\Working newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Working[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Working|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Working saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Working patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Working[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Working findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Works get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Works newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Works[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Works|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Works saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Works patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Works[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Works findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class WorkingTable extends Table
+class WorksTable extends Table
 {
     /**
      * Initialize method
@@ -34,7 +34,7 @@ class WorkingTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('working');
+        $this->setTable('works');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 

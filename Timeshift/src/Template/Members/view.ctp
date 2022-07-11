@@ -11,10 +11,7 @@
         <li><?= $this->Form->postLink(__('Delete Member'), ['action' => 'delete', $member->id], ['confirm' => __('Are you sure you want to delete # {0}?', $member->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Members'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Member'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List At Work'), ['controller' => 'AtWork', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New At Work'), ['controller' => 'AtWork', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Lg Work'), ['controller' => 'LgWork', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Lg Work'), ['controller' => 'LgWork', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Works', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">
@@ -55,52 +52,35 @@
     </table>
     <div class="related">
         <h4><?= __('Related At Work') ?></h4>
-        <?php if (!empty($member->at_work)): ?>
+        <?php if (!empty($member->works)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Time') ?></th>
+                <th scope="col"><?= __('Check_in') ?></th>
+                <th scope="col"><?= __('Check_out') ?></th>
                 <th scope="col"><?= __('Member Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($member->at_work as $atWork): ?>
+            <?php foreach ($member->works as $works): ?>
             <tr>
-                <td><?= h($atWork->id) ?></td>
-                <td><?= h($atWork->time) ?></td>
-                <td><?= h($atWork->member_id) ?></td>
+                <td><?= h($works->id) ?></td>
+                <td><?= h($works->check_in) ?></td>
+                <td><?= h($works->check_out) ?></td>
+                <td><?= h($works->member_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'AtWork', 'action' => 'view', $atWork->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'AtWork', 'action' => 'edit', $atWork->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'AtWork', 'action' => 'delete', $atWork->id], ['confirm' => __('Are you sure you want to delete # {0}?', $atWork->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Works', 'action' => 'view', $works->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Works', 'action' => 'edit', $works->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Works', 'action' => 'delete', $works->id], ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
     </div>
-    <div class="related">
-        <h4><?= __('Related Lg Work') ?></h4>
-        <?php if (!empty($member->lg_work)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Time') ?></th>
-                <th scope="col"><?= __('Member Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($member->lg_work as $lgWork): ?>
-            <tr>
-                <td><?= h($lgWork->id) ?></td>
-                <td><?= h($lgWork->time) ?></td>
-                <td><?= h($lgWork->member_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'LgWork', 'action' => 'view', $lgWork->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'LgWork', 'action' => 'edit', $lgWork->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'LgWork', 'action' => 'delete', $lgWork->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lgWork->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
+    <?php
+// $time1= $works->check_out->i18nFormat('yyyy-MM-dd HH:mm:ss');
+// $time2 = $works->check_in->i18nFormat('yyyy-MM-dd HH:mm:ss');
+// echo $time1;
+// ?>
+
 </div>

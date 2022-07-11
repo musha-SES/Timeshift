@@ -7,7 +7,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Working', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Works', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">

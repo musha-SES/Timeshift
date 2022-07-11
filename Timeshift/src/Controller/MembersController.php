@@ -19,6 +19,7 @@ class MembersController extends AppController
      */
     public function index()
     {
+
         $members = $this->paginate($this->Members);
 
         $this->set(compact('members'));
@@ -34,7 +35,7 @@ class MembersController extends AppController
     public function view($id = null)
     {
         $member = $this->Members->get($id, [
-            'contain' => ['AtWork', 'LgWork'],
+            'contain' => ['Works'],
         ]);
 
         $this->set('member', $member);
@@ -50,7 +51,7 @@ class MembersController extends AppController
     public function users($id = null)
     {
         $member = $this->Members->get($id, [
-            'contain' => ['AtWork', 'LgWork'],
+            'contain' => ['Works'],
         ]);
 
         $this->set('member', $member);
@@ -136,7 +137,8 @@ class MembersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                $id = $this->Auth->user('id');
+                return $this->redirect(['action'=>'view',$id]);
             } else {
                 $this->Flash->error('メールアドレスかパスワードが間違っています');
             }
