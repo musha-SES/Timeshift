@@ -4,7 +4,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\I18n\Date;
 use Cake\I18n\time;
-
+use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\ORM\TableRegistry;
 /**
  * Works Controller
  *
@@ -61,30 +62,37 @@ class WorksController extends AppController
         $work = $this->Works->find()->where(['member_id' => $id])->all();
         // print_r($work);
 
-        // foreach($work as $work){
-        //     // echo $work->check_in;
-        //     if($work->created == $date){
-        //     echo $work->check_in;
-        //     echo $work->created;
-        //     echo '<br>';
-        // }
-        // }
-        var_dump( $this->request->getData());
+        $create[] ='';
+        foreach($work as $work){
+            // echo $work->check_in;
+            if($work->created == $date){
+            $create[0]= $work->created;
+        }
+        }
+        echo $create[0];
+        print_r($this->request->getData());
         $works = $this->Works->newEntity();
-        if ($this->request->is('post')) {
-            $works = $this->works->patchEntity($works, $this->request->getData());
-            var_dump( $this->request->getData());
-            if ($this->Works->save($works)) {
-                $this->Flash->success(__('The works has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
+        if($create[0] !=''){
+            $this->Flash->success(__('既にデータがあります'));
+            return $this->redirect(['action' => 'index']);
+
+        }else{
+
+            if ($this->request->is('post')) {
+                $works = $this->Works->patchEntity($works, $this->request->getData());
+                if ($this->Works->save($works)) {
+                    $this->Flash->success(__('The works has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                // }
+        }
             $this->Flash->error(__('The works could not be saved. Please, try again.'));
         }
         $members = $this->Works->Members->find('list', ['limit' => 200]);
         $this->set(compact('work','works', 'members','date','time'));
     }
-
+    }
     /**
      * Edit method
      *
@@ -97,6 +105,24 @@ class WorksController extends AppController
         $works = $this->Works->get($id, [
             'contain' => [],
         ]);
+
+        $aid = $this->Auth->user('id');
+        $date = Date::now();
+        $work = $this->Works->find()->where(['id'=>$id])->member_id();
+        // print_r($work->member_id);
+
+
+
+        $works = $this->Works->get($id, [
+            'contain' => [],
+        ]);
+
+        if($mem_id[0] !=''){
+
+
+        }else{
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $works = $this->Works->patchEntity($works, $this->request->getData());
             if ($this->Works->save($works)) {
@@ -106,8 +132,9 @@ class WorksController extends AppController
             }
             $this->Flash->error(__('The works could not be saved. Please, try again.'));
         }
+    }
         $members = $this->Works->Members->find('list', ['limit' => 200]);
-        $this->set(compact('works', 'members'));
+        $this->set(compact( 'members','works','aid'));
     }
 
     /**

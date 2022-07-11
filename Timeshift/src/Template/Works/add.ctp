@@ -42,6 +42,7 @@
         }
             echo $this->Form->control('check_out');
             echo $this->Form->hidden( 'member_id' ,['value'=> $id ]) ;
+            echo $this->Form->hidden( 'created' ,['value'=> $date ]) ;
             // echo $this->Form->control('member_id', ['options' => $members]);
         ?>
     </fieldset>
