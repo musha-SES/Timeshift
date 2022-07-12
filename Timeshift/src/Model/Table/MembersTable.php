@@ -10,11 +10,6 @@ use Cake\Validation\Validator;
  * Members Model
  *
  * @property \App\Model\Table\WorksTable&\Cake\ORM\Association\HasMany $Works
-<<<<<<< HEAD
- *
-=======
- * 
->>>>>>> master
  * @method \App\Model\Entity\Member get($primaryKey, $options = [])
  * @method \App\Model\Entity\Member newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Member[] newEntities(array $data, array $options = [])

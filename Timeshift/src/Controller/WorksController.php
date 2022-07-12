@@ -132,7 +132,7 @@ class WorksController extends AppController
         // print_r($work);
         $mem_id[] ='';
         foreach($work as $work){
-            // echo $work->check_in;
+            //echo $work->check_in;
             if($work->member_id == $aid){
             $mem_id[0]= $work->created;
         }
@@ -182,5 +182,23 @@ class WorksController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+
+        if (in_array($action, ['add',"logout","view","edit","delete"])) {
+            return true;
+        }
+        // $id =  (int)$this->Works->get('members_id');
+        // var_dump($id);
+        // exit();
+        // if(($id == $user['id'])) {
+        //     if (in_array($action,['users'])) {
+        //         return true;
+        //     }
+        // }
+        return parent::isAuthorized($user);
     }
 }
