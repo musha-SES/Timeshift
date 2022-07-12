@@ -7,7 +7,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Working', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Works', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">
@@ -36,22 +36,22 @@
 
     </table>
     <div class="related">
-        <h4><?= __('Related Working') ?></h4>
-        <?php if (!empty($member->working)): ?>
+        <h4><?= __('Related Works') ?></h4>
+        <?php if (!empty($member->works)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('出勤') ?></th>
                 <th scope="col"><?= __('退勤') ?></th>
                 <th scope="col" class="actions"><?= __('編集') ?></th>
             </tr>
-            <?php foreach ($member->working as $workIng): ?>
+            <?php foreach ($member->works as $works): ?>
             <tr>
-                <td><?= h($workIng->check_in) ?></td>
-                <td><?= h($workIng->check_out) ?></td>
+                <td><?= h($works->check_in) ?></td>
+                <td><?= h($works->check_out) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Working', 'action' => 'view', $workIng->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Working', 'action' => 'edit', $workIng->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Working', 'action' => 'delete', $workIng->id], ['confirm' => __('Are you sure you want to delete # {0}?', $workIng->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Works', 'action' => 'view', $works->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Works', 'action' => 'edit', $works->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Works', 'action' => 'delete', $works->id], ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

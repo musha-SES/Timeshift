@@ -1,16 +1,16 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\WorkingController;
+use App\Controller\WorksController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\WorkingController Test Case
+ * App\Controller\WorksController Test Case
  *
- * @uses \App\Controller\WorkingController
+ * @uses \App\Controller\WorksController
  */
-class WorkingControllerTest extends TestCase
+class WorksControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -20,7 +20,7 @@ class WorkingControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Working',
+        'app.Works',
         'app.Members',
     ];
 

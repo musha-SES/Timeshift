@@ -34,7 +34,7 @@ class MembersController extends AppController
     public function view($id = null)
     {
         $member = $this->Members->get($id, [
-            'contain' => ['Working'],
+            'contain' => ['Works'],
         ]);
 
         $this->set('member', $member);
@@ -50,7 +50,7 @@ class MembersController extends AppController
     public function users($id = null)
     {
         $member = $this->Members->get($id, [
-            'contain' => ['Working'],
+            'contain' => ['Works'],
         ]);
 
         $this->set('member', $member);

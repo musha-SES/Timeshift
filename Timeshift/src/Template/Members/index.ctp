@@ -8,7 +8,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('ユーザー新規追加'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Working', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Works', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="members index large-9 medium-8 columns content">

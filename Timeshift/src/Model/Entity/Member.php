@@ -15,7 +15,7 @@ use Cake\ORM\Entity;
  * @property string $address
  * @property \Cake\I18n\FrozenTime $created
  *
- * @property \App\Model\Entity\Working[] $working
+ * @property \App\Model\Entity\Works[] $works
  */
 class Member extends Entity
 {
@@ -36,7 +36,7 @@ class Member extends Entity
         'birth' => true,
         'address' => true,
         'created' => true,
-        'working' => true,
+        'works' => true,
     ];
 
     /**

@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Members Model
  *
- * @property \App\Model\Table\WorkingTable&\Cake\ORM\Association\HasMany $Working
+ * @property \App\Model\Table\WorksTable&\Cake\ORM\Association\HasMany $Works
  * 
  * @method \App\Model\Entity\Member get($primaryKey, $options = [])
  * @method \App\Model\Entity\Member newEntity($data = null, array $options = [])
@@ -40,7 +40,7 @@ class MembersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Working', [
+        $this->hasMany('Works', [
             'foreignKey' => 'member_id',
         ]);
     }

@@ -4,16 +4,16 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * WorkingFixture
+ * WorksFixture
  */
-class WorkingFixture extends TestFixture
+class WorksFixture extends TestFixture
 {
     /**
      * Table name
      *
      * @var string
      */
-    public $table = 'working';
+    public $table = 'works';
     /**
      * Fields
      *

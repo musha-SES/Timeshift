@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Working $working
+ * @var \App\Model\Entity\Works $works
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
@@ -9,19 +9,19 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $working->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $working->id)]
+                ['action' => 'delete', $works->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Working'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Works'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Members'), ['controller' => 'Members', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Member'), ['controller' => 'Members', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="working form large-9 medium-8 columns content">
-    <?= $this->Form->create($working) ?>
+<div class="works form large-9 medium-8 columns content">
+    <?= $this->Form->create($works) ?>
     <fieldset>
-        <legend><?= __('Edit Working') ?></legend>
+        <legend><?= __('Edit Works') ?></legend>
         <?php
             echo $this->Form->control('check_in', ['empty' => true]);
             echo $this->Form->control('check_out', ['empty' => true]);
