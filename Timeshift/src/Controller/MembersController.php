@@ -8,7 +8,7 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\MembersTable $Members
  *
- * @method \App\Model\Entity\Member[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\Member[]|\Cake\Datasource\ResultSetInterface ($object = null, array $settings = [])
  */
 class MembersController extends AppController
 {
@@ -58,7 +58,8 @@ class MembersController extends AppController
      */
     public function users($id = null)
     {
-        try {$member = $this->Members->get($id, [
+        try {
+            $member = $this->Members->get($id, [
             'contain' => ['Works'],
         ]);
 
