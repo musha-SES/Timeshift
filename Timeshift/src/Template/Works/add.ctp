@@ -28,7 +28,7 @@
             echo '<br>';
         }
         }
-        echo $checkin;
+        // echo $checkin;
     echo $username; ?>
 
     <!-- </ul>
@@ -40,13 +40,13 @@
         <legend><?= __('Add Works') ?></legend>
         <?php
 
-        if($checkin !== ''){
-            // echo $this->Form->control('check_in');
-            echo $this->Form->control('check_in',["dateFormat" => "yyyy-MM-dd HH:mm:ss",
-            'default'=> date($checkin)]);
-        }else{
+        // if($checkin !== ''){
+        //     // echo $this->Form->control('check_in');
+        //     echo $this->Form->control('check_in',["dateFormat" => "yyyy-MM-dd HH:mm:ss",
+        //     'default'=> date($checkin)]);
+        // }else{
             echo $this->Form->control('check_in',array('default'=>date($time)));
-        }
+        // }
             echo $this->Form->control('check_out',array('default'=>date($time->modify('+9 hour'))));
             echo $this->Form->hidden( 'member_id' ,['value'=> $id ]) ;
             // echo $this->Form->hidden( 'created' ,['value'=> $date ]) ;

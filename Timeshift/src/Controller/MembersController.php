@@ -22,6 +22,7 @@ class MembersController extends AppController
 
         $members = $this->paginate($this->Members);
 
+
         $this->set(compact('members'));
     }
 
@@ -39,7 +40,7 @@ class MembersController extends AppController
         ]);
             // print_r($this->Members->get($id)->id);
 
-            if($this->Members->get($id)->id !== $this->Auth->user('id')){
+            if($this->Members->get($id)->id !== $this->Auth->user('id') && $this->Auth->user('role') !== 'admin'){
                 $this->Flash->success(__('ログインユーザーではありません'));
                 $id = $this->Auth->user('id');
             return $this->redirect(['action' => 'view',$id]);
@@ -57,11 +58,23 @@ class MembersController extends AppController
      */
     public function users($id = null)
     {
-        $member = $this->Members->get($id, [
+        try {$member = $this->Members->get($id, [
             'contain' => ['Works'],
         ]);
 
-        $this->set('member', $member);
+            if($this->Members->get($id)->id !== $this->Auth->user('id') && $this->Auth->user('role') !== 'admin'){
+                $this->Flash->success(__('不正なURLです'));
+                $id = $this->Auth->user('id');
+            return $this->redirect(['action' => 'users',$id]);
+        }
+            $this->set('member', $member);
+        } catch(\Exception $e) {
+            // ここに例外が発生した際の処理を書く
+            $this->Flash->success(__('不正なURLです'));
+            $id = $this->Auth->user('id');
+            return $this->redirect(['action' => 'users',$id]);
+          }
+
     }
 
     /**
@@ -176,7 +189,7 @@ class MembersController extends AppController
     {
         $action = $this->request->getParam('action');
 
-        if (in_array($action, ['login','add','logout'])) {
+        if (in_array($action, ['login','add','logout','users'])) {
             return true;
         }
         $id = (int)$this->request->getParam('pass.0');

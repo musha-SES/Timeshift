@@ -7,7 +7,6 @@ use Cake\I18n\Date;
 use Cake\I18n\time;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\TableRegistry;
-
 /**
  * Works Controller
  *
@@ -60,7 +59,7 @@ class WorksController extends AppController
         // echo $id;
         $date = Date::now();
         $time = time::now();
-        echo $date. '<br>';
+        // echo $date. '<br>';
 
         $work = $this->Works->find()->where(['member_id' => $id])->all();
         // print_r($work);
@@ -72,8 +71,8 @@ class WorksController extends AppController
             $create[0]= $work->created;
         }
         }
-        echo $create[0];
-        print_r($this->request->getData());
+        // echo $create[0];
+        // print_r($this->request->getData());
         $works = $this->Works->newEntity();
 
         if($create[0] !=''){
@@ -87,7 +86,7 @@ class WorksController extends AppController
                 if ($this->Works->save($works)) {
                     $this->Flash->success(__('The works has been saved.'));
 
-                    return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['controller' => 'Members', 'action' => 'users', $id]);
                 // }
         }
             $this->Flash->error(__('The works could not be saved. Please, try again.'));
@@ -129,6 +128,13 @@ class WorksController extends AppController
         $aid = $this->Auth->user('id');
         $date = Date::now();
         $work = $this->Works->find()->where(['id'=>$id])->all();
+        $m_id=$works->member_id ;
+        $this->loadModel('Members');
+        $users = $this->Members->find()->where(['id'=>$m_id])->all();
+        // print_r($users);
+        foreach($users as $users){
+            $name= $users->name;
+        }
         // print_r($work);
         $mem_id[] ='';
         foreach($work as $work){
@@ -144,23 +150,21 @@ class WorksController extends AppController
 
         if($mem_id[0] !=''){
 
-
-        }else{
-
-
-
         if ($this->request->is(['patch', 'post', 'put'])) {
             $works = $this->Works->patchEntity($works, $this->request->getData());
             if ($this->Works->save($works)) {
                 $this->Flash->success(__('The works has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                if($this->Auth->user('role') == 'user'){
+                    return $this->redirect(['controller' => 'Members', 'action' => 'users', $aid]);
+                }else{
+                    return $this->redirect(['controller' => 'Members', 'action' => 'index']);
+                }
             }
             $this->Flash->error(__('The works could not be saved. Please, try again.'));
         }
     }
         $members = $this->Works->Members->find('list', ['limit' => 200]);
-        $this->set(compact( 'members','works','aid'));
+        $this->set(compact( 'members','works','aid','name'));
 
     }
 
@@ -180,7 +184,24 @@ class WorksController extends AppController
         } else {
             $this->Flash->error(__('The works could not be deleted. Please, try again.'));
         }
+        $id = $this->Auth->user('id');
+        return $this->redirect(['controller' => 'Members', 'action' => 'users', $id]);
+    }
 
-        return $this->redirect(['action' => 'index']);
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+
+        if (in_array($action, ['login','add','logout','delete','edit'])) {
+            return true;
+        }
+        $id = (int)$this->request->getParam('pass.0');
+        if(($id == $user['id'])) {
+            if (in_array($action,['users'])) {
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
+
     }
 }

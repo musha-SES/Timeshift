@@ -7,19 +7,12 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-<<<<<<< HEAD
-        <li><?= $this->Html->link(__('Edit Member'), ['action' => 'edit', $member->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Member'), ['action' => 'delete', $member->id], ['confirm' => __('Are you sure you want to delete # {0}?', $member->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Members'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Member'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Works', 'action' => 'add']) ?></li>
-=======
+
         <li><?= $this->Html->link(__('ユーザーリスト'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('新規登録'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('登録情報の編集'), ['action' => 'edit', $member->id]) ?> </li>
         <li><?= $this->Form->postLink(__('ユーザー削除'), ['action' => 'delete', $member->id], ['confirm' => __('Are you sure you want to delete # {0}?', $member->id)]) ?> </li>
 
->>>>>>> master
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">

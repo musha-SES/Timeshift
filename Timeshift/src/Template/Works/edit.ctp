@@ -19,8 +19,10 @@
     </ul>
 </nav>
 <div class="works form large-9 medium-8 columns content">
+    <?= $name; ?>
     <?= $this->Form->create($works) ?>
     <fieldset>
+
         <legend><?= __('Edit Works') ?></legend>
         <?php
             echo $this->Form->control('check_in', ['empty' => true]);
