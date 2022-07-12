@@ -1,38 +1,42 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\AtWork[]|\Cake\Collection\CollectionInterface $atWork
+ * @var \App\Model\Entity\Works[]|\Cake\Collection\CollectionInterface $works
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New At Work'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New Works'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Members'), ['controller' => 'Members', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Member'), ['controller' => 'Members', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="atWork index large-9 medium-8 columns content">
-    <h3><?= __('At Work') ?></h3>
+<div class="works index large-9 medium-8 columns content">
+    <h3><?= __('Works') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('time') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('check_in') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('check_out') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('member_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($atWork as $atWork): ?>
+            <?php foreach ($works as $works): ?>
             <tr>
-                <td><?= $this->Number->format($atWork->id) ?></td>
-                <td><?= h($atWork->time) ?></td>
-                <td><?= $atWork->has('member') ? $this->Html->link($atWork->member->name, ['controller' => 'Members', 'action' => 'view', $atWork->member->id]) : '' ?></td>
+                <td><?= $this->Number->format($works->id) ?></td>
+                <td><?= h($works->check_in) ?></td>
+                <td><?= h($works->check_out) ?></td>
+                <td><?= $works->has('member') ? $this->Html->link($works->member->name, ['controller' => 'Members', 'action' => 'view', $works->member->id]) : '' ?></td>
+                <td><?= h($works->created) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $atWork->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $atWork->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $atWork->id], ['confirm' => __('Are you sure you want to delete # {0}?', $atWork->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $works->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $works->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $works->id], ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
