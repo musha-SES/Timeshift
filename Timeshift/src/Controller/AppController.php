@@ -59,7 +59,11 @@ class AppController extends Controller
                 'controller' => 'Members',
                 'action' => 'index'
             ],
-
+            // ログアウト後のリダイレクト先(コントローラーとアクション)
+            'logoutRedirect' => [
+                'controller' => 'Members',
+                'action' => 'login'
+            ],
             'authenticate' => [
                 'Form' => [
                     'userModel' => 'Members',
@@ -69,12 +73,14 @@ class AppController extends Controller
                     ]
                 ]
             ],
-            // ログアウト後にリダイレクトさせる URL、デフォルトは loginAction を参照する
-            // 'logoutRedirect' => []
+            // 未ログイン時にログイン必須ページを閲覧した際のMSG
+            'authError' => __('認可されていないページです。')
         ]);
     }
     public function isAuthorized($user)
     {
+        $this->Auth->allow(['login']);
+
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
