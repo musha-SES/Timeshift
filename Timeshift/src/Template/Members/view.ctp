@@ -7,11 +7,19 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
+<<<<<<< HEAD
+        <li><?= $this->Html->link(__('Edit Member'), ['action' => 'edit', $member->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Member'), ['action' => 'delete', $member->id], ['confirm' => __('Are you sure you want to delete # {0}?', $member->id)]) ?> </li>
+        <li><?= $this->Html->link(__('List Members'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Member'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Works', 'action' => 'add']) ?></li>
+=======
         <li><?= $this->Html->link(__('ユーザーリスト'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('新規登録'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('登録情報の編集'), ['action' => 'edit', $member->id]) ?> </li>
         <li><?= $this->Form->postLink(__('ユーザー削除'), ['action' => 'delete', $member->id], ['confirm' => __('Are you sure you want to delete # {0}?', $member->id)]) ?> </li>
- 
+
+>>>>>>> master
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">
@@ -51,6 +59,8 @@
         </tr>
     </table>
     <div class="related">
+
+
         <h4><?= __('Related Works') ?></h4>
         <?php if (!empty($member->works)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -63,6 +73,7 @@
             <tr>
                 <td><?= h($works->check_in) ?></td>
                 <td><?= h($works->check_out) ?></td>
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Works', 'action' => 'view', $works->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Works', 'action' => 'edit', $works->id]) ?>
@@ -73,4 +84,10 @@
         </table>
         <?php endif; ?>
     </div>
+    <?php
+// $time1= $works->check_out->i18nFormat('yyyy-MM-dd HH:mm:ss');
+// $time2 = $works->check_in->i18nFormat('yyyy-MM-dd HH:mm:ss');
+// echo $time1;
+// ?>
+
 </div>

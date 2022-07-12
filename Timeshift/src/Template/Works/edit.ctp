@@ -25,7 +25,7 @@
         <?php
             echo $this->Form->control('check_in', ['empty' => true]);
             echo $this->Form->control('check_out', ['empty' => true]);
-            echo $this->Form->control('member_id', ['options' => $members]);
+            echo $this->Form->hidden( 'member_id' ,['value'=> $aid ]) ;
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
