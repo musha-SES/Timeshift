@@ -24,6 +24,14 @@ class MembersController extends AppController
 
 
         $this->set(compact('members'));
+        // echo $this->Auth->user('role');
+        if($this->Auth->user('role') == 'user'){
+
+            // $this->render('/Members/login');
+            $id = $this->Auth->user('id');
+            return $this->redirect(['action' => 'users',$id]);
+        }
+
     }
 
     /**
@@ -190,7 +198,7 @@ class MembersController extends AppController
     {
         $action = $this->request->getParam('action');
 
-        if (in_array($action, ['login','add','logout','users'])) {
+        if (in_array($action, ['index','login','add','logout','users'])) {
             return true;
         }
         $id = (int)$this->request->getParam('pass.0');
