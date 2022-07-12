@@ -138,24 +138,55 @@ class MembersController extends AppController
 
     public function login()
     {
-        $member = $this->Members->newEntity();
+        //$member = $this->Members->newEntity();
         if ($this->request->is('post')) {
-            $member = $this->Members->patchEntity($member, $this->request->data);
+            //$member = $this->Members->patchEntity($member, $this->request->data);
             $user = $this->Auth->identify();
             if ($user) {
-                $this->Auth->setUser($user);
+                // $this->Auth->setUser($user);
                 $id = $this->Auth->user('id');
-                return $this->redirect(['action'=>'view',$id]);
+
+                $this->Auth->setUser($user);
+
+                // $id = $this->Auth->user('id');
+                // return $this->redirect(['action'=>'view',$id]);
+
+                // var_dump($user["role"]);
+                // exit();
+                if ($user["role"] == "user") {
+                    return $this->redirect(["action" => "users", $id]);
+                } else {
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
+
+
             } else {
                 $this->Flash->error('メールアドレスかパスワードが間違っています');
             }
         }
-        $this->set(compact($member));
+        //$this->set(compact($member));
     }
 
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
+    }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+
+        if (in_array($action, ['login','add','logout'])) {
+            return true;
+        }
+        $id = (int)$this->request->getParam('pass.0');
+        if(($id == $user['id'])) {
+            if (in_array($action,['users'])) {
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
+
     }
 }
 

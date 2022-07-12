@@ -2,10 +2,12 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+
 use Cake\I18n\Date;
 use Cake\I18n\time;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\TableRegistry;
+
 /**
  * Works Controller
  *
@@ -53,6 +55,7 @@ class WorksController extends AppController
      */
     public function add()
     {
+
         $id = $this->Auth->user('id');
         // echo $id;
         $date = Date::now();
@@ -93,6 +96,22 @@ class WorksController extends AppController
         $this->set(compact('work','works', 'members','date','time'));
     }
     }
+
+    //     $works = $this->Works->newEntity();
+    //     if ($this->request->is('post')) {
+    //         $works = $this->Works->patchEntity($works, $this->request->getData());
+    //         if ($this->Works->save($works)) {
+    //             $this->Flash->success(__('The works has been saved.'));
+
+    //             return $this->redirect(['action' => 'index']);
+    //         }
+    //         $this->Flash->error(__('The works could not be saved. Please, try again.'));
+    //     }
+    //     $members = $this->Works->Members->find('list', ['limit' => 200]);
+    //     $this->set(compact('works', 'members'));
+    // }
+
+
     /**
      * Edit method
      *
@@ -105,6 +124,7 @@ class WorksController extends AppController
         $works = $this->Works->get($id, [
             'contain' => [],
         ]);
+
 
         $aid = $this->Auth->user('id');
         $date = Date::now();
@@ -128,6 +148,7 @@ class WorksController extends AppController
         }else{
 
 
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $works = $this->Works->patchEntity($works, $this->request->getData());
             if ($this->Works->save($works)) {
@@ -140,6 +161,7 @@ class WorksController extends AppController
     }
         $members = $this->Works->Members->find('list', ['limit' => 200]);
         $this->set(compact( 'members','works','aid'));
+
     }
 
     /**

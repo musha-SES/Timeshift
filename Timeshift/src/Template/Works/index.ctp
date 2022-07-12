@@ -33,8 +33,10 @@
                 <td><?= h($works->check_out) ?></td>
                 <td><?= $works->has('member') ? $this->Html->link($works->member->name, ['controller' => 'Members', 'action' => 'view', $works->member->id]) : '' ?></td>
                 <td><?= h($works->created) ?></td>
+
                 <?php $id = $this->request->getSession()->read('Auth.User.id');
                     if($id == $works->member_id): ?>
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $works->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $works->id]) ?>

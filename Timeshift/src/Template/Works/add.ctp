@@ -7,6 +7,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
+
         <li><?= $this->Html->link(__('List Works'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Members'), ['controller' => 'Members', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Member'), ['controller' => 'Members', 'action' => 'add']) ?></li>
@@ -29,10 +30,16 @@
         }
         echo $checkin;
     echo $username; ?>
+
+    <!-- </ul>
+</nav>
+<div class="works form large-9 medium-8 columns content"> -->
+
     <?= $this->Form->create($works) ?>
     <fieldset>
         <legend><?= __('Add Works') ?></legend>
         <?php
+
         if($checkin !== ''){
             // echo $this->Form->control('check_in');
             echo $this->Form->control('check_in',["dateFormat" => "yyyy-MM-dd HH:mm:ss",
@@ -44,6 +51,7 @@
             echo $this->Form->hidden( 'member_id' ,['value'=> $id ]) ;
             // echo $this->Form->hidden( 'created' ,['value'=> $date ]) ;
             // echo $this->Form->control('member_id', ['options' => $members]);
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
