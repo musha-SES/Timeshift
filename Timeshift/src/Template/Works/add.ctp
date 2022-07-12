@@ -40,9 +40,9 @@
         }else{
             echo $this->Form->control('check_in',array('default'=>date($time)));
         }
-            echo $this->Form->control('check_out');
+            echo $this->Form->control('check_out',array('default'=>date($time->modify('+9 hour'))));
             echo $this->Form->hidden( 'member_id' ,['value'=> $id ]) ;
-            echo $this->Form->hidden( 'created' ,['value'=> $date ]) ;
+            // echo $this->Form->hidden( 'created' ,['value'=> $date ]) ;
             // echo $this->Form->control('member_id', ['options' => $members]);
         ?>
     </fieldset>

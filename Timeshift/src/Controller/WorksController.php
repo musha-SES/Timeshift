@@ -108,10 +108,15 @@ class WorksController extends AppController
 
         $aid = $this->Auth->user('id');
         $date = Date::now();
-        $work = $this->Works->find()->where(['id'=>$id])->member_id();
-        // print_r($work->member_id);
-
-
+        $work = $this->Works->find()->where(['id'=>$id])->all();
+        // print_r($work);
+        $mem_id[] ='';
+        foreach($work as $work){
+            // echo $work->check_in;
+            if($work->member_id == $aid){
+            $mem_id[0]= $work->created;
+        }
+        }
 
         $works = $this->Works->get($id, [
             'contain' => [],

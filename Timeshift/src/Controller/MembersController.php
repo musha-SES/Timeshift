@@ -37,6 +37,13 @@ class MembersController extends AppController
         $member = $this->Members->get($id, [
             'contain' => ['Works'],
         ]);
+            // print_r($this->Members->get($id)->id);
+
+            if($this->Members->get($id)->id !== $this->Auth->user('id')){
+                $this->Flash->success(__('ログインユーザーではありません'));
+                $id = $this->Auth->user('id');
+            return $this->redirect(['action' => 'view',$id]);
+        }
 
         $this->set('member', $member);
     }
