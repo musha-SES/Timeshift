@@ -7,7 +7,11 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('出退勤'), ['controller' => 'Works', 'action' => 'add']) ?></li>
+        <?php if($checkout == ''):?>
+            <li><?= $this->Html->link(__('退勤打刻'), ['controller' => 'Works', 'action' => 'taikin',$wid]) ?></li>
+            <?php else: ?>
+                <li><?= $this->Html->link(__('出勤打刻'), ['controller' => 'Works', 'action' => 'add']) ?></li>
+        <?php endif; ?>
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">
@@ -51,6 +55,7 @@
                 <td class="actions">
 
                     <?php if($works->check_out == null): ?>
+                        <!-- 退勤データがなければ退勤ボタンを表示 -->
                 <?= $this->Html->link(__('退勤'), ['controller' => 'Works', 'action' => 'taikin', $works->id]) ?>
                 <?php endif; ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Works', 'action' => 'edit', $works->id]) ?>

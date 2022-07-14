@@ -25,6 +25,7 @@
             </tr>
         </thead>
         <tbody>
+            <?php array_reverse(array($works)); ?>
             <?php foreach ($works as $works): ?>
             <tr>
                 <td><?= $this->Number->format($works->id) ?></td>

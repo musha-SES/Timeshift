@@ -76,7 +76,7 @@ class WorksController extends AppController
         // echo $create[0];
         // print_r($this->request->getData());
         $works = $this->Works->newEntity();
-        echo $create[0];
+        // echo $create[0];
         if($create[0] ==''){
             $this->Flash->success(__('退勤していません'));
             return $this->redirect(['action' => 'index']);
@@ -91,7 +91,11 @@ class WorksController extends AppController
                 if ($this->Works->save($works)) {
                     $this->Flash->success(__('出勤しました'));
 
-                    return $this->redirect(['controller' => 'Members', 'action' => 'users', $id]);
+                    if($this->Auth->user('role') == 'user'){
+                        return $this->redirect(['controller' => 'Members', 'action' => 'users', $id]);
+                    }else{
+                        return $this->redirect(['controller' => 'Members', 'action' => 'index']);
+                    }
                 // }
         // }
             $this->Flash->error(__('The works could not be saved. Please, try again.'));

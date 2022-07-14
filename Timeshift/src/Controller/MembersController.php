@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\i18n\FrozenDate;
 use Cake\Chronos\Chronos;
+use Cake\I18n\Date;
+
 /**
  * Members Controller
  *
@@ -47,15 +49,40 @@ class MembersController extends AppController
         $member = $this->Members->get($id, [
             'contain' => ['Works'],
         ]);
+
+        // $id = $this->Auth->user('id');
+        // $work = $this->Works->find()->where(['member_id' => $id])->all();
+        // print_r($work);
+        $date = Date::now();
+
+        //そのユーザーの最新のレコードのIDと退勤データの有無を取得
+        $checkout[] =['','1'];
+        $wid[] ='';
+        foreach($member->works as $work){
+            // echo $work->check_in;
+            if($work->created == $date){
+            $checkout[0]= $work->check_out;
+            $checkin[0]= $work->check_in;
+            $wid[0]=$work->id;
+        }
+        }
+        // print_r($wid);
+        // print_r($checkout);
+
+        //最新の勤怠データに退勤がある場合
+        if($checkout[0] !=''){
+            $this->Flash->success(__('出勤していません'));
+        }
             // print_r($this->Members->get($id)->id);
 
-            if($this->Members->get($id)->id !== $this->Auth->user('id') && $this->Auth->user('role') !== 'admin'){
-                $this->Flash->success(__('ログインユーザーではありません'));
-                $id = $this->Auth->user('id');
-            return $this->redirect(['action' => 'view',$id]);
-        }
 
         $this->set('member', $member);
+        $this->set('wid',$wid[0]);
+        if(isset($checkin)){
+            $this->set('checkout',$checkout[0]);
+        }else{
+            $this->set('checkout','1');
+        }
     }
 
     /**
@@ -67,10 +94,22 @@ class MembersController extends AppController
      */
     public function users($id = null)
     {
+        $date = Date::now();
+
         try {
             $member = $this->Members->get($id, [
             'contain' => ['Works'],
         ]);
+        $checkout[] =['','1'];
+        $wid[] ='';
+        foreach($member->works as $work){
+            // echo $work->check_in;
+            if($work->created == $date){
+            $checkout[0]= $work->check_out;
+            $checkin[0]= $work->check_in;
+            $wid[0]=$work->id;
+        }
+        }
 
             if($this->Members->get($id)->id !== $this->Auth->user('id') && $this->Auth->user('role') !== 'admin'){
                 $this->Flash->success(__('不正なURLです'));
@@ -78,12 +117,19 @@ class MembersController extends AppController
             return $this->redirect(['action' => 'users',$id]);
         }
             $this->set('member', $member);
+            $this->set('wid',$wid[0]);
+            if(isset($checkin)){
+                $this->set('checkout',$checkout[0]);
+            }else{
+                $this->set('checkout','1');
+            }
         } catch(\Exception $e) {
             // ここに例外が発生した際の処理を書く
             $this->Flash->success(__('不正なURLです'));
             $id = $this->Auth->user('id');
             return $this->redirect(['action' => 'users',$id]);
           }
+
 
     }
 
