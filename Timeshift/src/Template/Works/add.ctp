@@ -47,9 +47,11 @@
         //     echo $this->Form->control('check_in',["dateFormat" => "yyyy-MM-dd HH:mm:ss",
         //     'default'=> date($checkin)]);
         // }else{
-            echo $this->Form->control('check_in',array('default'=>date($time)));
+            echo $this->Form->select('check_in',array('value'=>$time));
+            print_r($time);
         // }
-            echo $this->Form->control('check_out',array('default'=>date($time->modify('+9 hour'))));
+            // echo $this->Form->control('check_out',array('default'=>date($time->modify('+9 hour'))));
+            echo $this->Form->hidden('check_out');
             echo $this->Form->hidden( 'member_id' ,['value'=> $id ]) ;
             // echo $this->Form->hidden( 'created' ,['value'=> $date ]) ;
             // echo $this->Form->control('member_id', ['options' => $members]);

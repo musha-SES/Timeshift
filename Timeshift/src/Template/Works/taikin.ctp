@@ -24,10 +24,11 @@
     <fieldset>
 
         <legend><?= __('Edit Works') ?></legend>
+        <?= $time; ?>
         <!-- <p id="RealtimeClockArea2"></p> -->
         <?php
-            echo $this->Form->control('check_in', ['empty' => true]);
-            echo $this->Form->control('check_out', ['value' => $time]);
+            echo $this->Form->hidden('check_in', ['empty' => true]);
+            echo $this->Form->hidden('check_out', ['value' => $time]);
             echo $this->Form->hidden( 'member_id' ,['value'=> $aid ]) ;
         ?>
     </fieldset>
