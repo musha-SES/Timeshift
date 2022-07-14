@@ -59,7 +59,10 @@ class WorksController extends AppController
         // echo $id;
         $date = Date::now();
         $time = time::now();
+
         // echo $date. '<br>';
+
+
         $work = $this->Works->find()->where(['member_id' => $id])->all();
         // print_r($work);
 
@@ -140,7 +143,7 @@ class WorksController extends AppController
         // print_r($work);
         $mem_id[] ='';
         foreach($work as $work){
-            // echo $work->check_in;
+            //echo $work->check_in;
             if($work->member_id == $aid){
             $mem_id[0]= $work->created;
         }
@@ -167,6 +170,7 @@ class WorksController extends AppController
         }
     }
         $members = $this->Works->Members->find('list', ['limit' => 200]);
+
         $this->set(compact( 'members','works','aid','name','time'));
 
     }

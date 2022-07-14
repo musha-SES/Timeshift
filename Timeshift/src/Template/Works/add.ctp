@@ -8,9 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
 
-        <li><?= $this->Html->link(__('List Works'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Members'), ['controller' => 'Members', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Member'), ['controller' => 'Members', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('ユーザーリスト'), ['controller' => 'Members', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('勤怠リスト'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="works form large-9 medium-8 columns content">
@@ -42,6 +41,7 @@
 
         <?php
 
+
         // if($checkin !== ''){
         //     // echo $this->Form->control('check_in');
         //     echo $this->Form->control('check_in',["dateFormat" => "yyyy-MM-dd HH:mm:ss",
@@ -52,6 +52,7 @@
         // }
             // echo $this->Form->control('check_out',array('default'=>date($time->modify('+9 hour'))));
             echo $this->Form->hidden('check_out');
+
             echo $this->Form->hidden( 'member_id' ,['value'=> $id ]) ;
             // echo $this->Form->hidden( 'created' ,['value'=> $date ]) ;
             // echo $this->Form->control('member_id', ['options' => $members]);

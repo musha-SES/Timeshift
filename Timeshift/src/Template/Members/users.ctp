@@ -49,6 +49,7 @@
                 <td><?= h($works->check_in) ?></td>
                 <td><?= h($works->check_out) ?></td>
                 <td class="actions">
+
                     <?php if($works->check_out == null): ?>
                 <?= $this->Html->link(__('退勤'), ['controller' => 'Works', 'action' => 'taikin', $works->id]) ?>
                 <?php endif; ?>
