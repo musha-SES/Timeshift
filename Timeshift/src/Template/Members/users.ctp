@@ -44,12 +44,15 @@
                 <th scope="col"><?= __('退勤') ?></th>
                 <th scope="col" class="actions"><?= __('編集') ?></th>
             </tr>
-            <?php foreach ($member->works as $works): ?>
+            <?php foreach (array_reverse($member->works) as $works): ?>
             <tr>
                 <td><?= h($works->check_in) ?></td>
                 <td><?= h($works->check_out) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Works', 'action' => 'view', $works->id]) ?>
+
+                    <?php if($works->check_out == null): ?>
+                <?= $this->Html->link(__('退勤'), ['controller' => 'Works', 'action' => 'taikin', $works->id]) ?>
+                <?php endif; ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Works', 'action' => 'edit', $works->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Works', 'action' => 'delete', $works->id], ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]) ?>
                 </td>
@@ -58,4 +61,25 @@
         </table>
         <?php endif; ?>
     </div>
+    <p id="RealtimeClockArea2"></p>
+
 </div>
+
+<script>
+    function set2fig(num) {
+   // 桁数が1桁だったら先頭に0を加えて2桁に調整する
+   var ret;
+   if( num < 10 ) { ret = "0" + num; }
+   else { ret = num; }
+   return ret;
+}
+function showClock2() {
+   var nowTime = new Date();
+   var nowHour = set2fig( nowTime.getHours() );
+   var nowMin  = set2fig( nowTime.getMinutes() );
+   var nowSec  = set2fig( nowTime.getSeconds() );
+   var msg = "現在時刻は、" + nowHour + ":" + nowMin + ":" + nowSec + " です。";
+   document.getElementById("RealtimeClockArea2").innerHTML = msg;
+}
+setInterval('showClock2()',1000);
+</script>

@@ -2,7 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\i18n\FrozenDate;
+use Cake\Chronos\Chronos;
 /**
  * Members Controller
  *
@@ -25,7 +26,7 @@ class MembersController extends AppController
         $this->set(compact('members'));
         // echo $this->Auth->user('role');
         if($this->Auth->user('role') == 'user'){
-
+            $this->Flash->success(__('不正なURLです'));
             // $this->render('/Members/login');
             $id = $this->Auth->user('id');
             return $this->redirect(['action' => 'users',$id]);
@@ -177,11 +178,9 @@ class MembersController extends AppController
     {
         $action = $this->request->getParam('action');
 
-<<<<<<< HEAD
-        if (in_array($action, ['add',"logout"])) {
-=======
+
         if (in_array($action, ['index','login','add','logout','users'])) {
->>>>>>> b5f96b6 (画面遷移修正)
+
             return true;
         }
         $id = (int)$this->request->getParam('pass.0');
