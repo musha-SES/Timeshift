@@ -13,6 +13,7 @@
             <?php else: ?>
                 <li><?= $this->Html->link(__('出勤打刻'), ['controller' => 'Works', 'action' => 'add']) ?></li>
         <?php endif; ?>
+        <li><?= $this->Html->link(__('ダウンロード'), ['controller' => 'Members', 'action' => 'download',$id]) ?></li>
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">
