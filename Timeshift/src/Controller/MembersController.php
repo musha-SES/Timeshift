@@ -15,6 +15,12 @@ use Cake\I18n\Date;
  */
 class MembersController extends AppController
 {
+
+    public $paginate = [
+		'limit' => 3 // 1ページに表示するデータ件数
+	];
+
+
     /**
      * Index method
      *
@@ -97,9 +103,13 @@ class MembersController extends AppController
         $date = Date::now();
 
         try {
-            $member = $this->Members->get($id, [
-            'contain' => ['Works'],
+            // $this->paginate = [
+            //     'contain' => ['Members'],
+            // ];
+            $member = $this->Members->get($id,[
+            'contain' =>  $this->paginate = ['Works'],
         ]);
+        // print_r($member);
         $checkout[] =['','1'];
         $wid[] ='';
         foreach($member->works as $work){
@@ -250,6 +260,12 @@ class MembersController extends AppController
             }
         }
         return parent::isAuthorized($user);
+    }
+
+    public function initialize() {
+        parent::initialize();
+
+        $this->loadComponent('Paginator');
     }
 }
 
