@@ -25,6 +25,7 @@
             </tr>
         </thead>
         <tbody>
+            <?php array_reverse(array($works)); ?>
             <?php foreach ($works as $works): ?>
             <tr>
                 <td><?= $this->Number->format($works->id) ?></td>
@@ -34,7 +35,7 @@
                 <td><?= h($works->created) ?></td>
 
                 <?php $id = $this->request->getSession()->read('Auth.User.id');
-                    if($id == $works->member_id): ?>
+                    ?>
 
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $works->id]) ?>
@@ -42,7 +43,7 @@
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $works->id], ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]) ?>
                 </td>
             </tr>
-            <?php endif; ?>
+
             <?php endforeach; ?>
         </tbody>
     </table>

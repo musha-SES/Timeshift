@@ -4,10 +4,9 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 use Cake\I18n\Date;
-use Cake\I18n\time;
+use Cake\I18n\Time;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\TableRegistry;
-
 /**
  * Works Controller
  *
@@ -60,36 +59,45 @@ class WorksController extends AppController
         // echo $id;
         $date = Date::now();
         $time = time::now();
-        echo $date. '<br>';
+
+        // echo $date. '<br>';
+
 
         $work = $this->Works->find()->where(['member_id' => $id])->all();
         // print_r($work);
 
-        $create[] ='';
+        $create[] ='a';
         foreach($work as $work){
             // echo $work->check_in;
             if($work->created == $date){
-            $create[0]= $work->created;
+            $create[0]= $work->check_out;
         }
         }
-        echo $create[0];
-        print_r($this->request->getData());
+        // echo $create[0];
+        // print_r($this->request->getData());
         $works = $this->Works->newEntity();
-
-        if($create[0] !=''){
-            $this->Flash->success(__('既にデータがあります'));
+        // echo $create[0];
+        if($create[0] ==''){
+            $this->Flash->success(__('退勤していません'));
             return $this->redirect(['action' => 'index']);
 
         }else{
 
-            if ($this->request->is('post')) {
-                $works = $this->Works->patchEntity($works, $this->request->getData());
+            // if ($this->request->is('post')) {
+                // print_r($works, $this->request->getData());
+                $works = $this->Works->newEntity();
+                $works->check_in= $time;
+                $works->member_id=$id;
                 if ($this->Works->save($works)) {
-                    $this->Flash->success(__('The works has been saved.'));
+                    $this->Flash->success(__('出勤しました'));
 
-                    return $this->redirect(['action' => 'index']);
+                    if($this->Auth->user('role') == 'user'){
+                        return $this->redirect(['controller' => 'Members', 'action' => 'users', $id]);
+                    }else{
+                        return $this->redirect(['controller' => 'Members', 'action' => 'index']);
+                    }
                 // }
-        }
+        // }
             $this->Flash->error(__('The works could not be saved. Please, try again.'));
         }
         $members = $this->Works->Members->find('list', ['limit' => 200]);
@@ -125,10 +133,17 @@ class WorksController extends AppController
             'contain' => [],
         ]);
 
-
+        $time = time::now();
         $aid = $this->Auth->user('id');
         $date = Date::now();
         $work = $this->Works->find()->where(['id'=>$id])->all();
+        $m_id=$works->member_id ;
+        $this->loadModel('Members');
+        $users = $this->Members->find()->where(['id'=>$m_id])->all();
+        // print_r($users);
+        foreach($users as $users){
+            $name= $users->name;
+        }
         // print_r($work);
         $mem_id[] ='';
         foreach($work as $work){
@@ -144,23 +159,23 @@ class WorksController extends AppController
 
         if($mem_id[0] !=''){
 
-
-        }else{
-
-
-
         if ($this->request->is(['patch', 'post', 'put'])) {
+
             $works = $this->Works->patchEntity($works, $this->request->getData());
             if ($this->Works->save($works)) {
                 $this->Flash->success(__('The works has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                if($this->Auth->user('role') == 'user'){
+                    return $this->redirect(['controller' => 'Members', 'action' => 'users', $aid]);
+                }else{
+                    return $this->redirect(['controller' => 'Members', 'action' => 'index']);
+                }
             }
             $this->Flash->error(__('The works could not be saved. Please, try again.'));
         }
     }
         $members = $this->Works->Members->find('list', ['limit' => 200]);
-        $this->set(compact( 'members','works','aid'));
+
+        $this->set(compact( 'members','works','aid','name','time'));
 
     }
 
@@ -180,25 +195,79 @@ class WorksController extends AppController
         } else {
             $this->Flash->error(__('The works could not be deleted. Please, try again.'));
         }
+        $id = $this->Auth->user('id');
+        return $this->redirect(['controller' => 'Members', 'action' => 'users', $id]);
+    }
 
-        return $this->redirect(['action' => 'index']);
+
+
+
+
+    public function taikin($id = null)
+    {
+        $works = $this->Works->get($id, [
+            'contain' => [],
+        ]);
+
+        $time = time::now();
+        $aid = $this->Auth->user('id');
+        $date = Date::now();
+        $work = $this->Works->find()->where(['id'=>$id])->all();
+        $m_id=$works->member_id ;
+        $this->loadModel('Members');
+        $users = $this->Members->find()->where(['id'=>$m_id])->all();
+        // print_r($users);
+        foreach($users as $users){
+            $name= $users->name;
+        }
+        // print_r($work);
+        $mem_id[] ='';
+        foreach($work as $work){
+            // echo $work->check_in;
+            if($work->member_id == $aid){
+            $mem_id[0]= $work->created;
+        }
+        }
+
+        $works = $this->Works->get($id, [
+            'contain' => [],
+        ]);
+
+        if($mem_id[0] !=''){
+
+        // if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $works = $this->Works->patchEntity($works, ['id'=>$id,'check_out'=>$time,]);
+            if ($this->Works->save($works)) {
+                $this->Flash->success(__('退勤しました'));
+                if($this->Auth->user('role') == 'user'){
+                    return $this->redirect(['controller' => 'Members', 'action' => 'users', $aid]);
+                }else{
+                    return $this->redirect(['controller' => 'Members', 'action' => 'index']);
+                }
+            // }
+            $this->Flash->error(__('The works could not be saved. Please, try again.'));
+        }
+    }
+        $members = $this->Works->Members->find('list', ['limit' => 200]);
+        $this->set(compact( 'members','works','aid','name','time'));
+
     }
 
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
 
-        if (in_array($action, ['add',"logout","view","edit","delete"])) {
+        if (in_array($action, ['login','add','logout','delete','edit','taikin'])) {
             return true;
         }
-        // $id =  (int)$this->Works->get('members_id');
-        // var_dump($id);
-        // exit();
-        // if(($id == $user['id'])) {
-        //     if (in_array($action,['users'])) {
-        //         return true;
-        //     }
-        // }
+        $id = (int)$this->request->getParam('pass.0');
+        if(($id == $user['id'])) {
+            if (in_array($action,['users'])) {
+                return true;
+            }
+        }
         return parent::isAuthorized($user);
+
     }
 }
