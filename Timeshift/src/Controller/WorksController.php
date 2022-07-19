@@ -26,7 +26,7 @@ class WorksController extends AppController
         $this->paginate = [
             'contain' => ['Members'],
         ];
-        $works = $this->paginate($this->Works);
+        $works = $this->paginate($this->Works,['limit' => 5]);
 
         $this->set(compact('works'));
     }

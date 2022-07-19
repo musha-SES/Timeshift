@@ -7,7 +7,6 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-
         <li><?= $this->Html->link(__('ユーザーリスト'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('登録内容の変更'), ['action' => 'edit', $member->id]) ?> </li>
         <li><?= $this->Html->link(__('社員の新規登録'), ['action' => 'add']) ?> </li>
@@ -17,7 +16,6 @@
             <?php else: ?>
                 <li><?= $this->Html->link(__('出勤打刻'), ['controller' => 'Works', 'action' => 'add']) ?></li>
         <?php endif; ?>
-
     </ul>
 </nav>
 <div class="members view large-9 medium-8 columns content">

@@ -2,11 +2,12 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Table\WorksTable;
 use Cake\i18n\FrozenDate;
 use Cake\Chronos\Chronos;
+use Cake\Datasource\Paginator;
 use Cake\I18n\Date;
 use PHPExcel_IOFactory;
-
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xls as XlsReader;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as Reader;
@@ -16,7 +17,6 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Cake\Http\CallbackStream;
-
 use PhpOffice\PhpSpreadsheet\Writer\Pdf;
 
 /**
@@ -42,7 +42,7 @@ class MembersController extends AppController
     public function index()
     {
 
-        $members = $this->paginate($this->Members);
+        $members = $this->paginate($this->Members,['limit' => 5]);
 
 
         $this->set(compact('members'));
@@ -104,6 +104,16 @@ class MembersController extends AppController
         }
     }
 
+    // public $paginate = [
+    //     // 'contain' => ['Works'],
+    //     'limit' => 1
+    // ];
+    // public function initialize()
+    // {
+    //     parent::initialize();
+    //     $this->loadComponent('Paginator');
+    // }
+    public $uses =array('Works');
     /**
      * View method
      *
@@ -137,8 +147,8 @@ class MembersController extends AppController
             if($this->Members->get($id)->id !== $this->Auth->user('id') && $this->Auth->user('role') !== 'admin'){
                 $this->Flash->success(__('不正なURLです'));
                 $id = $this->Auth->user('id');
-            return $this->redirect(['action' => 'users',$id]);
-        }
+                return $this->redirect(['action' => 'users',$id]);
+            }
             $this->set('member', $member);
             $this->set('wid',$wid[0]);
             $this->set('id',$id);
@@ -152,8 +162,9 @@ class MembersController extends AppController
             $this->Flash->success(__('不正なURLです'));
             $id = $this->Auth->user('id');
             return $this->redirect(['action' => 'users',$id]);
-          }
-
+        }
+       
+        $this->set('works',$this->paginate());
 
     }
 
