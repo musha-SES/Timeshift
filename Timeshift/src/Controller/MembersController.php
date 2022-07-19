@@ -260,6 +260,7 @@ class MembersController extends AppController
 
     public function download ($id=null){
         $date = Date::now();
+        $today = date('d');
 
         $member = $this->Members->get($id, [
             'contain' => ['Works'],
@@ -280,14 +281,22 @@ class MembersController extends AppController
         ->setDescription('コメント')
         ->setKeywords('キーワード');
         $i=0;
+        $counter = 0;
+        $today = FrozenDate::now();
+
+        // print_r($works->created);
         // for($i=1;$i<=$count;$i++){
         foreach (array_reverse($member->works) as $works){
-            $i++;
+            $kongetsu = new FrozenDate($works->created);
+            if ($today->diffInMonths($kongetsu) ==0) {
+                $i++;
+
                 $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('B'.($i+1), $i)
                 ->setCellValue('C'.($i+1), date($works->created))
                 ->setCellValue('E'.($i+1), $works->check_in)
                 ->setCellValue('H'.($i+1), $works->check_out);
+            }
             // }
         }
         $sheet = $spreadsheet->getActiveSheet();
@@ -345,8 +354,8 @@ class MembersController extends AppController
         $action = $this->request->getParam('action');
 
 
-        if (in_array($action, ['index','login','logout','users','download'])) {
 
+        if (in_array($action, ['index','login','logout','users','download'])) {
             return true;
         }
         $id = (int)$this->request->getParam('pass.0');
