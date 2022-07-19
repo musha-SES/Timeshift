@@ -125,6 +125,7 @@ class MembersController extends AppController
         // print_r($member);
         $checkout[] =['','1'];
         $wid[] ='';
+        $i = 0;
         foreach($member->works as $work){
             // echo $work->check_in;
             if($work->created == $date){
@@ -139,6 +140,8 @@ class MembersController extends AppController
                 $id = $this->Auth->user('id');
             return $this->redirect(['action' => 'users',$id]);
         }
+        //最新のデータにチェックインが存在する場合、退勤時間を参照
+        //退勤時間が存在するかで表示を変えるため変数に格納
             $this->set('member', $member);
             $this->set('wid',$wid[0]);
             $this->set('id',$id);
@@ -355,7 +358,7 @@ class MembersController extends AppController
 
 
 
-        if (in_array($action, ['index','login','logout','users','download'])) {
+        if (in_array($action, ['login','logout','users','download'])) {
             return true;
         }
         $id = (int)$this->request->getParam('pass.0');

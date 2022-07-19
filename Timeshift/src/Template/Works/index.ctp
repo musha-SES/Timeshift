@@ -4,11 +4,13 @@
  * @var \App\Model\Entity\Works[]|\Cake\Collection\CollectionInterface $works
  */
 ?>
+                <?php $id = $this->request->getSession()->read('Auth.User.id');
+                    ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('ユーザーリスト'), ['controller' => 'Members', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('勤怠登録'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('勤怠登録'), ['controller' => 'Members', 'action' => 'view',$id]) ?></li>
     </ul>
 </nav>
 <div class="works index large-9 medium-8 columns content">
@@ -34,8 +36,7 @@
                 <td><?= $works->has('member') ? $this->Html->link($works->member->name, ['controller' => 'Members', 'action' => 'view', $works->member->id]) : '' ?></td>
                 <td><?= h($works->created) ?></td>
 
-                <?php $id = $this->request->getSession()->read('Auth.User.id');
-                    ?>
+
 
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $works->id]) ?>

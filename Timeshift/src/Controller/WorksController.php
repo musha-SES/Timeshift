@@ -79,7 +79,7 @@ class WorksController extends AppController
         // echo $create[0];
         if($create[0] ==''){
             $this->Flash->success(__('退勤していません'));
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect( ['controller' => 'Members', 'action' => 'index']);
 
         }else{
 
@@ -93,7 +93,7 @@ class WorksController extends AppController
 
                     if($this->Auth->user('role') == 'user'){
                         return $this->redirect(['controller' => 'Members', 'action' => 'users', $id]);
-                    }else{
+                    }if($this->Auth->user('role') == 'admin'){
                         return $this->redirect(['controller' => 'Members', 'action' => 'index']);
                     }
                 // }

@@ -48,12 +48,23 @@
             <tr>
                 <th scope="col"><?= __('出勤') ?></th>
                 <th scope="col"><?= __('退勤') ?></th>
+                <th scope="col"><?= __('残業時間（分）') ?></th>
                 <th scope="col" class="actions"><?= __('編集') ?></th>
+
             </tr>
-            <?php foreach (array_reverse($member->works) as $works): ?>
+            <?php $i=0;
+                foreach (array_reverse($member->works) as $works): ?>
+                <!-- 表示件数を制限 -->
+            <?php if($i>=20){break;} ?>
+
             <tr>
                 <td><?= h($works->check_in) ?></td>
                 <td><?= h($works->check_out) ?></td>
+                <td><?php if(h(((strtotime($works->check_out)-strtotime($works->check_in))-60*60*9)/60)>0){
+                    echo h(((strtotime($works->check_out)-strtotime($works->check_in))-60*60*9)/60);
+                }else{
+                    echo 0;
+                } ?></td>
                 <td class="actions">
 
                     <?php if($works->check_out == null): ?>
@@ -64,20 +75,21 @@
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Works', 'action' => 'delete', $works->id], ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]) ?>
                 </td>
             </tr>
-            <?php endforeach; ?>
+            <?php $i++;
+                endforeach; ?>
         </table>
         <?php endif; ?>
     </div>
     <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+<ul class="pagination">
+<?= $this->Paginator->first('<< ' . '最初') ?>
+<?= $this->Paginator->prev('< ' . '前へ') ?>
+<?= $this->Paginator->numbers() ?>
+<?= $this->Paginator->next('次へ' . ' >') ?>
+<?= $this->Paginator->last('最後' . ' >>') ?>
+</ul>
+</div>
+
 
     <p id="RealtimeClockArea2"></p>
 
