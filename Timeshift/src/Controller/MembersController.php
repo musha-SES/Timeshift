@@ -102,6 +102,9 @@ class MembersController extends AppController
         }else{
             $this->set('checkout','1');
         }
+        $id=$this->Auth->user('id');
+        $this->set('id',$id);
+
     }
 
     /**
@@ -143,6 +146,7 @@ class MembersController extends AppController
         //最新のデータにチェックインが存在する場合、退勤時間を参照
         //退勤時間が存在するかで表示を変えるため変数に格納
             $this->set('member', $member);
+            $this->set('role', $this->Auth->user('role'));
             $this->set('wid',$wid[0]);
             $this->set('id',$id);
             if(isset($checkin)){

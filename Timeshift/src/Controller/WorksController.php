@@ -258,7 +258,7 @@ class WorksController extends AppController
     {
         $action = $this->request->getParam('action');
 
-        if (in_array($action, ['login','add','logout','delete','edit','taikin'])) {
+        if (in_array($action, ['login','add','logout','taikin'])) {
             return true;
         }
         $id = (int)$this->request->getParam('pass.0');

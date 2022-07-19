@@ -43,13 +43,18 @@
     </table>
     <div class="related">
         <h4><?= __('Related Works') ?></h4>
+
         <?php if (!empty($member->works)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('出勤') ?></th>
                 <th scope="col"><?= __('退勤') ?></th>
                 <th scope="col"><?= __('残業時間（分）') ?></th>
-                <th scope="col" class="actions"><?= __('編集') ?></th>
+                <th scope="col" class="actions">
+                    <?php if($role == 'admin'): ?>
+                    <?= __('編集') ?>
+                    <?php endif; ?>
+                </th>
 
             </tr>
             <?php $i=0;
@@ -71,8 +76,10 @@
                         <!-- 退勤データがなければ退勤ボタンを表示 -->
                 <?= $this->Html->link(__('退勤'), ['controller' => 'Works', 'action' => 'taikin', $works->id]) ?>
                 <?php endif; ?>
+                <?php if($role == 'admin'): ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Works', 'action' => 'edit', $works->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Works', 'action' => 'delete', $works->id], ['confirm' => __('Are you sure you want to delete # {0}?', $works->id)]) ?>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php $i++;
@@ -80,7 +87,7 @@
         </table>
         <?php endif; ?>
     </div>
-    <div class="paginator">
+    <!-- <div class="paginator">
 <ul class="pagination">
 <?= $this->Paginator->first('<< ' . '最初') ?>
 <?= $this->Paginator->prev('< ' . '前へ') ?>
@@ -88,7 +95,7 @@
 <?= $this->Paginator->next('次へ' . ' >') ?>
 <?= $this->Paginator->last('最後' . ' >>') ?>
 </ul>
-</div>
+</div> -->
 
 
     <p id="RealtimeClockArea2"></p>
