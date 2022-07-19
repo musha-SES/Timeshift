@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Member $member
  */
 ?>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -12,10 +13,14 @@
         <li><?= $this->Html->link(__('登録内容の変更'), ['action' => 'edit', $member->id]) ?> </li>
         <li><?= $this->Html->link(__('社員の新規登録'), ['action' => 'add']) ?> </li>
         <li><?= $this->Form->postLink(__('社員の削除'), ['action' => 'delete', $member->id], ['confirm' => __('Are you sure you want to delete # {0}?', $member->id)]) ?> </li>
+        <?php if($member->id == $id): ?>
+        <li><?= $this->Html->link(__('ダウンロード'), ['controller' => 'Members', 'action' => 'download',$id]) ?></li>
+
         <?php if($checkout == ''):?>
             <li><?= $this->Html->link(__('退勤打刻'), ['controller' => 'Works', 'action' => 'taikin',$wid]) ?></li>
             <?php else: ?>
                 <li><?= $this->Html->link(__('出勤打刻'), ['controller' => 'Works', 'action' => 'add']) ?></li>
+        <?php endif; ?>
         <?php endif; ?>
 
     </ul>
