@@ -2,8 +2,11 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Table\WorksTable;
 use Cake\i18n\FrozenDate;
 use Cake\Chronos\Chronos;
+use Cake\Datasource\Paginator;
+
 /**
  * Members Controller
  *
@@ -21,7 +24,7 @@ class MembersController extends AppController
     public function index()
     {
 
-        $members = $this->paginate($this->Members);
+        $members = $this->paginate($this->Members,['limit' => 5]);
 
 
         $this->set(compact('members'));
@@ -58,6 +61,16 @@ class MembersController extends AppController
         $this->set('member', $member);
     }
 
+    // public $paginate = [
+    //     // 'contain' => ['Works'],
+    //     'limit' => 1
+    // ];
+    // public function initialize()
+    // {
+    //     parent::initialize();
+    //     $this->loadComponent('Paginator');
+    // }
+    public $uses =array('Works');
     /**
      * View method
      *
@@ -67,24 +80,31 @@ class MembersController extends AppController
      */
     public function users($id = null)
     {
+        
         try {
             $member = $this->Members->get($id, [
-            'contain' => ['Works'],
-        ]);
-
+                'contain' => ['Works'],
+            ]);
+            
             if($this->Members->get($id)->id !== $this->Auth->user('id') && $this->Auth->user('role') !== 'admin'){
                 $this->Flash->success(__('不正なURLです'));
                 $id = $this->Auth->user('id');
-            return $this->redirect(['action' => 'users',$id]);
-        }
+                return $this->redirect(['action' => 'users',$id]);
+            }
             $this->set('member', $member);
         } catch(\Exception $e) {
             // ここに例外が発生した際の処理を書く
             $this->Flash->success(__('不正なURLです'));
             $id = $this->Auth->user('id');
             return $this->redirect(['action' => 'users',$id]);
-          }
+        }
 
+        
+        $this->set('works',$this->paginate());
+        // $this->paginate=array('Works'=>array('limit'=>3));
+        // $works = $this->Paginator->paginate('Works',array('Works.member_id',2));
+        // $this->set(compact('works'));
+        
     }
 
     /**
@@ -205,5 +225,7 @@ class MembersController extends AppController
         }
         return parent::isAuthorized($user);
     }
+   
+
 }
 
